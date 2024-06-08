@@ -105,6 +105,41 @@ const deleteTour = (req, res) => {
   });
 };
 
+const getAllUsers = (req, res) => {
+  res.status(500).json({
+    status: 'fail',
+    message: 'This route is not done yet',
+  });
+};
+
+const getUser = (req, res) => {
+  res.status(500).json({
+    status: 'fail',
+    message: 'This route is not done yet',
+  });
+};
+
+const updateUser = (req, res) => {
+  res.status(500).json({
+    status: 'fail',
+    message: 'This route is not done yet',
+  });
+};
+
+const deleteUser = (req, res) => {
+  res.status(500).json({
+    status: 'fail',
+    message: 'This route is not done yet',
+  });
+};
+
+const createUser = (req, res) => {
+  res.status(500).json({
+    status: 'fail',
+    message: 'This route is not done yet',
+  });
+};
+
 //3) ROUTES
 
 app.route('/api/v1/tours').get(getAllTours).post(createTour);
@@ -114,6 +149,14 @@ app
   .get(getTour)
   .patch(updateTour)
   .delete(deleteTour);
+
+app.route('/api/v1/users').get(getAllUsers).post(createUser);
+
+app
+  .route('/api/v1/users/:id')
+  .get(getUser)
+  .patch(updateUser)
+  .delete(deleteUser);
 
 //4) START SERVER
 

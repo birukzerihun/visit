@@ -8,10 +8,18 @@ const sendErrorDev = (err, res) => {
 };
 
 const sendErrorProd = (err, res) => {
-  res.statusCode(err.statusCode).json({
-    status: err.status,
-    message: err.message
-  });
+  if (err.isOperational) {
+    res.status(err.statusCode).json({
+      status: err.status,
+      message: err.message
+    });
+  } else {
+    console.log(`ERROR 🔥`, err);
+    res.status(err.statusCode).json({
+      status: 'fail',
+      message: 'Something went very wrong'
+    });
+  }
 };
 module.exports = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
@@ -20,18 +28,6 @@ module.exports = (err, req, res, next) => {
   if (process.env.NODE_ENV !== 'development') {
     sendErrorDev(err, res);
   } else if (process.env.NODE_ENV !== 'production') {
-    if (err.isOperational) {
-      res.status(err.statusCode).json({
-        status: err.status,
-        message: err.message
-      });
-    } else {
-      console.log(`ERROR 🔥`);
-      res.status(err.statusCode).json({
-        status: 'fail',
-        message: 'Something went very wrong'
-      });
-    }
     sendErrorProd(err, res);
   }
 };

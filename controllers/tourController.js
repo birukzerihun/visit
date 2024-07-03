@@ -30,12 +30,18 @@ exports.getAllTours = catchAsync(async (req, res, next) => {
 });
 
 exports.getTour = catchAsync(async (req, res, next) => {
-  const tour = await Tour.findById(req.params.id);
-  //Tour.findOne({_id: req.params.id})
+  const { id } = req.params;
+
+  // if (!mongoose.Types.ObjectId.isValid(id)) {
+  //   return next(new AppError('Invalid ID format', 400));
+  // }
+
+  const tour = await Tour.findById(id);
 
   if (!tour) {
     return next(new AppError('No tour found with that ID', 404));
   }
+
   res.status(200).json({
     status: 'success',
     data: {

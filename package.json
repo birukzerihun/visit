@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon server.js",
-    "start:prod": "set NODE_ENV=production & nodemon server.js"
+    "start:prod": "cross-env NODE_ENV=production nodemon server.js"
   },
   "author": "Biruk Zerihun",
   "license": "ISC",
@@ -18,6 +18,7 @@
     "validator": "^13.12.0"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.1",
     "eslint-config-prettier": "^4.3.0",
